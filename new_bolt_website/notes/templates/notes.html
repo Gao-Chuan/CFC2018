@@ -1,0 +1,44 @@
+<html>
+  <body>
+    <center>
+      <h1>B.O.L.T. Corp.</h1>
+      <!-- Hate to put the hard code here but my lazyness allowed me to do so. dikim -->
+      <iframe width="300" height="30" src="http://10.0.22.5/cgi-bin/date.sh" frameBorder="0"></iframe>
+      <br />
+      <br />
+      <a href="/">Home</a>
+      <a href="/hmi">HMI</a>
+      <a href="/hpc">HPC</a>
+      <a href="/notes">Notes</a>
+      <a href="/inventory">Inventory</a>
+      <a href="/fileshare">File Share</a>
+      <a href="/helpdesk">Helpdesk</a>
+      <a href="/WebIOPi">WebIOPi</a>
+      <a href="/webmail">webmail</a>
+      <a href="/accounts/logout/?next=/">Log Out</a>
+      <h2>Engineering Notes</h2>
+      <p>Please use this page to report the current status of the B.O.L.T Corp. oil transport  systems. This is important in maintaining auditing compliance and is mandatory for all employees.</p>
+      <form method="post" action="{% url 'notes' %}">
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+        {% csrf_token %}
+      </form>
+      <table>
+      <tr>
+        <th>Datetime</th>
+        <th>User</th>
+        <th>Note</th>
+      </tr>
+      {% for note in notes %}
+      <tr>
+      {% autoescape on %}
+      <td>{{note.date_time}}</td>
+      <td>{{note.user|escape}}</td>
+      <td>{{note.text|escape}}</td>
+      {% endautoescape %}
+      </tr>
+      {% endfor %}
+      </table>
+    </center>
+  </body>
+</html>

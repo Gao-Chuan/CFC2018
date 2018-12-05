@@ -1,0 +1,27 @@
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+
+      {% if form.errors %}
+      <p>There's something wrong with what you entered!</p>
+      {% endif %}
+
+<!--
+      {% if next %}
+      <p>Hey, you can't access this page.</p>
+      {% endif %}
+-->
+      <form class="form-signin" method="POST" action="{% url 'login' %}">
+	{% csrf_token %}
+	<p>Username: {{ form.username }}</p>
+	<p>Password: {{ form.password }}</p>
+        <p><input type="submit" value="Login"></p>
+	<input type="hidden" name="next" value="{{ next }}" >
+      </form>
+
+    </div> <!-- /container -->
+{% endblock %}

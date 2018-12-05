@@ -1,0 +1,38 @@
+<html>
+  <body>
+    <center>
+      <h1>B.O.L.T. Corp.</h1>
+      <br />
+      <br />
+      <a href="/">Home</a>
+      <a href="/hmi">HMI</a>
+      <a href="/hpc">HPC</a>
+      <a href="/notes">Notes</a>
+      <a href="/inventory">Inventory</a>
+      <a href="/fileshare">File Share</a>
+      <h2>Engineering Notes</h2>
+      <p>Please use this page to report the current status of the B.O.L.T Corp. oil transport  systems. This is important in maintaining auditing compliance and is mandatory for all employees.</p>
+      <form method="post" action="{% url 'notes' %}">
+        {{form.as_p}}
+        <input type="submit" value="Submit">
+        {% csrf_token %}
+      </form>
+      <table>
+      <tr>
+        <th>Datetime</th>
+        <th>User</th>
+        <th>Note</th>
+      </tr>
+      {% for note in notes %}
+      <tr>
+      {% autoescape off %}
+      <td>{{note.date_time}}</td>
+      <td>{{note.user}}</td>
+      <td>{{note.text}}</td>
+      {% endautoescape %}
+      </tr>
+      {% endfor %}
+      </table>
+    </center>
+  </body>
+</html>
